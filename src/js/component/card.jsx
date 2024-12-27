@@ -1,12 +1,10 @@
-import React from 'react';
-import '../../styles/index.css'; 
+import React from "react";
+import "../../styles/card.css";
 
 const Card = ({ title, value, description }) => {
   return (
     <div className="card">
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <div className="card-value">{value}</div>
+      <>,dkjsajlkjdlkasjkdl</>
     </div>
   );
 };

@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import GeneralQuestions from './GeneralQuestions';
+import ArtistQuestions from './ArtistQuestions';
+import spotifyData from '../../data/spotify_data_history.json';
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const [currentPage, setCurrentPage] = useState('general');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    setData(spotifyData);
+  }, []);
+
+  return (
+    <div>
+      <div className="navigation">
+        <button
+          className={currentPage === 'general' ? 'active' : ''}
+          onClick={() => setCurrentPage('general')}
+        >
+          General Questions
+        </button>
+        <button
+          className={currentPage === 'artist' ? 'active' : ''}
+          onClick={() => setCurrentPage('artist')}
+        >
+          Artist Questions
+        </button>
+      </div>
+      <div className="page-content">
+        {currentPage === 'general' && <GeneralQuestions data={data} />}
+        {currentPage === 'artist' && <ArtistQuestions data={data} />}
+      </div>
+    </div>
+  );
 };
 
 export default Home;

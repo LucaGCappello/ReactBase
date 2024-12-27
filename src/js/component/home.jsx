@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import GeneralQuestions from './GeneralQuestions';
-import ArtistQuestions from './ArtistQuestions';
-import spotifyData from '../../data/spotify_data_history.json';
-
+import React, { useState, useEffect } from "react";
+import GeneralQuestions from "./GeneralQuestions";
+import ArtistQuestions from "./ArtistQuestions";
+import spotifyData from "../../data/spotify_data_history.json";
+import Card from "../component/card";
 const Home = () => {
-  const [currentPage, setCurrentPage] = useState('general');
+  const [currentPage, setCurrentPage] = useState("general");
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -13,24 +13,25 @@ const Home = () => {
 
   return (
     <div>
-      <div className="navigation">
+      {/* <div className="navigation">
         <button
-          className={currentPage === 'general' ? 'active' : ''}
-          onClick={() => setCurrentPage('general')}
+          className={currentPage === "general" ? "active" : ""}
+          onClick={() => setCurrentPage("general")}
         >
           General Questions
         </button>
         <button
-          className={currentPage === 'artist' ? 'active' : ''}
-          onClick={() => setCurrentPage('artist')}
+          className={currentPage === "artist" ? "active" : ""}
+          onClick={() => setCurrentPage("artist")}
         >
-          Artist Questions
+          Artist
         </button>
       </div>
       <div className="page-content">
-        {currentPage === 'general' && <GeneralQuestions data={data} />}
-        {currentPage === 'artist' && <ArtistQuestions data={data} />}
-      </div>
+        {currentPage === "general" && <GeneralQuestions data={data} />}
+        {currentPage === "artist" && <ArtistQuestions data={data} />}
+      </div> */}
+      <Card />
     </div>
   );
 };

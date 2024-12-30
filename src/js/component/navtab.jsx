@@ -1,22 +1,17 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-	<div class="container-fluid">
-		<a class="navbar-brand">
-		</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+import React from 'react';
+import './navtab.css';
 
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page">Home</a>
-				</li>
+const NavTab = () => {
+  return (
+    <div className="navtab">
+      <button className="icon-button left-button">
+        <img src="./icon.png" alt="icon" className="icon" />
+      </button>
+      <button className="icon-button right-button">
+        <img src="./profile.png" alt="profile" className="profile-pic" />
+      </button>
+    </div>
+  );
+};
 
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page">Preços</a>
-				</li>
-
-			</ul>
-		</div>
-	</div>
-</nav>
+export default NavTab;

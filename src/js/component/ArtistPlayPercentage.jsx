@@ -1,65 +1,58 @@
-import React, { useState } from 'react';
-import { artistPlayPercentage, artistSpecificPercentage } from '../functions';
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { artistPlayPercentage } from '../functions';
 
 const ArtistPlayPercentage = ({ data }) => {
-  const [topArtists, setTopArtists] = useState(artistPlayPercentage(data)); // 10 primeiros artistas
-  const [newArtist, setNewArtist] = useState(''); // Nome do artista para pesquisa
-  const [newArtistResult, setNewArtistResult] = useState(''); // Resultado da pesquisa do novo artista
+  const artistData = artistPlayPercentage(data);
 
-  const handleSearchArtist = () => {
-    if (!newArtist.trim()) {
-      alert('Por favor, insira o nome de um artista.');
-      return;
-    }
-
-    const result = artistSpecificPercentage(data, newArtist);
-    setNewArtistResult(result);
+  const chartData = {
+    labels: artistData.map((item) => item.artist),
+    datasets: [
+      {
+        label: 'Porcentagem de Plays (%)',
+        data: artistData.map((item) => parseFloat(item.percentage)),
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+      },
+    ],
   };
 
-  const handleAddArtist = () => {
-    if (!newArtist.trim()) {
-      alert('Por favor, insira o nome de um artista.');
-      return;
-    }
-
-    const result = artistSpecificPercentage(data, newArtist);
-    if (!result.includes('não possui plays registrados')) {
-      const percentage = result.split(': ')[1];
-      setTopArtists([...topArtists, { artist: newArtist, percentage }]);
-    } else {
-      alert(result);
-    }
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => `${context.raw.toFixed(2)}%`,
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Porcentagem',
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: 'Artistas',
+        },
+      },
+    },
   };
 
   return (
-    <div className="artist-percentage">
-      <h2>Top 10 Artistas por Porcentagem</h2>
-      <ul>
-        {topArtists.map((item, index) => (
-          <li key={index}>
-            {index + 1}. {item.artist}: {item.percentage}
-          </li>
-        ))}
-      </ul>
-
-      <div className="search-section">
-        <input
-          type="text"
-          value={newArtist}
-          onChange={(e) => setNewArtist(e.target.value)}
-          placeholder="Digite o nome do artista"
-        />
-        <button onClick={handleSearchArtist}>Pesquisar</button>
+    <div>
+      <h2>Top 10 Artistas por Porcentagem de Plays</h2>
+      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <Bar data={chartData} options={chartOptions} />
       </div>
-
-      {newArtistResult && (
-        <div className="result-section">
-          <p>
-            <strong>Resultado:</strong> {newArtistResult}
-          </p>
-          <button onClick={handleAddArtist}>Adicionar Artista</button>
-        </div>
-      )}
     </div>
   );
 };

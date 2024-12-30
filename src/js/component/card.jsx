@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/card.css";
 
-const Card = ({ title, value, description }) => {
+const Card = ({ initialText, overlayText }) => {
+  const [showOverlayButton, setShowOverlayButton] = useState(false);
+
+  const handleInitialButtonClick = () => {
+    setShowOverlayButton(true); // Exibe o botão sobreposto
+  };
+
+  const handleOverlayButtonClick = () => {
+    setShowOverlayButton(false); // Oculta o botão sobreposto
+  };
+  // const text = overlayText()
+
   return (
     <div className="card">
-      <>,dkjsajlkjdlkasjkdl</>
+      <div className="button-container">
+        {!showOverlayButton && (
+          <button className="initial-button" onClick={handleInitialButtonClick}>
+            {initialText}
+          </button>
+        )}
+
+        {showOverlayButton && (
+          <button className="overlay-button" onClick={handleOverlayButtonClick}>
+            {overlayText}
+          </button>
+        )}
+      </div>
     </div>
   );
 };

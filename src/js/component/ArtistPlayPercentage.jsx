@@ -1,6 +1,18 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { artistPlayPercentage } from '../functions';
+
+// Registrar os componentes necessários do Chart.js
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const ArtistPlayPercentage = ({ data }) => {
   const artistData = artistPlayPercentage(data);
@@ -22,7 +34,7 @@ const ArtistPlayPercentage = ({ data }) => {
     responsive: true,
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
       tooltip: {
         callbacks: {

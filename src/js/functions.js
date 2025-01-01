@@ -140,9 +140,11 @@ export const topArtistsBySeason = (data) => {
 };
 
 // 11) Top 100 artistas ordenados por quantidade de plays
-export const top100ArtistsByPlays = (data) => {
+export const top100ArtistsByPlays = (data, period = 'all-time', currentDate = new Date()) => {
+  const filteredData = filterByTimePeriod(data, period, currentDate);
   const artistCount = {};
-  data.forEach((item) => {
+
+  filteredData.forEach((item) => {
     const artist = item.master_metadata_album_artist_name;
     if (artist) {
       artistCount[artist] = (artistCount[artist] || 0) + 1;
@@ -156,9 +158,11 @@ export const top100ArtistsByPlays = (data) => {
 };
 
 // 12) Top 100 músicas ordenadas por milissegundos em plays
-export const top100SongsByPlayTime = (data) => {
+export const top100SongsByPlayTime = (data, period = 'all-time', currentDate = new Date()) => {
+  const filteredData = filterByTimePeriod(data, period, currentDate);
   const songTime = {};
-  data.forEach((item) => {
+
+  filteredData.forEach((item) => {
     const song = item.master_metadata_track_name;
     if (song) {
       songTime[song] = (songTime[song] || 0) + item.ms_played;

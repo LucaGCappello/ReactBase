@@ -20,7 +20,6 @@ const ArtistQuestions = ({ data }) => {
     '2': { label: 'Músicas Diferentes por Artista', func: uniqueSongsByArtist },
     '3': { label: 'Minutos Ouvidos por Artista', func: totalMinutesByArtist },
     '4': { label: 'Top 20 Músicas por Tempo (Artista)', func: top20SongsByArtist },
-    '5': { label: 'Ranking do Artista', func: artistRanking },
    '5': { label: 'Ranking do Artista', func: artistRanking },
     '6': { label: 'Estação Mais Ativa do Artista', func: artistMostActiveSeason },
     '7': { label: 'Porcentagem de Plays por Artista (Gráfico)', func: ArtistPlayPercentage }, 

@@ -254,9 +254,11 @@ export const totalMinutesByArtist = (data, artistName) => {
 };
 
 // 4) Top 20 músicas de um artista por tempo de reprodução
+// Top 20 músicas de um artista específico por tempo de reprodução
 export const top20SongsByArtist = (data, artistName) => {
   const songDurations = {};
 
+  // Filtra as músicas do artista especificado e soma os tempos
   data
     .filter((item) => item.master_metadata_album_artist_name === artistName)
     .forEach((item) => {
@@ -266,6 +268,7 @@ export const top20SongsByArtist = (data, artistName) => {
       }
     });
 
+  // Ordena as músicas pelo tempo de reprodução e retorna as 20 melhores
   return Object.entries(songDurations)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 20)
@@ -273,6 +276,19 @@ export const top20SongsByArtist = (data, artistName) => {
       song,
       duration: (duration / 60000).toFixed(2) + ' minutos',
     }));
+};
+// Função para filtrar dados com base em um período
+export const filterByTimePeriod = (data, period, currentDate = new Date()) => {
+  const now = new Date(currentDate);
+  const timePeriods = {
+    '4-weeks': 4 * 7 * 24 * 60 * 60 * 1000, // Últimas 4 semanas
+    '6-months': 6 * 30 * 24 * 60 * 60 * 1000, // Últimos 6 meses
+    '1-year': 12 * 30 * 24 * 60 * 60 * 1000, // Último ano
+    'all-time': Infinity, // Desde sempre
+  };
+
+  const cutoff = now - timePeriods[period];
+  return data.filter((item) => new Date(item.ts).getTime() >= cutoff);
 };
 
 // Função para verificar em qual estação o artista é mais ativo

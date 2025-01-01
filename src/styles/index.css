@@ -78,3 +78,32 @@ button.active {
 .result-section button:hover {
   background-color: #0056b3;
 }
+
+.artist-questions select {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.artist-questions input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.artist-questions button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.artist-questions button:hover {
+  background-color: #0056b3;
+}

@@ -8,14 +8,9 @@ import {
   dailyAverageTime,
   mostActiveHours,
   mostActiveSeason,
-  topSongsBySeason,
-  topArtistsBySeason,
-  top100ArtistsByPlays,
-  top100SongsByPlayTime,
-  top20SongsByArtist,
 } from '../functions';
 
-const questions = {
+{/*const questions = {
   '1': { label: 'Total de Músicas Tocadas', func: totalSongsPlayed },
   '2': { label: 'Músicas Diferentes', func: uniqueSongsPlayed },
   '3': { label: 'Artistas Diferentes', func: uniqueArtistsPlayed },
@@ -29,9 +24,23 @@ const questions = {
   '11': { label: 'Top 100 Artistas por Plays', func: top100ArtistsByPlays, hasFilter: true },
   '12': { label: 'Top 100 Músicas por Play Time', func: top100SongsByPlayTime, hasFilter: true },
   '13': { label: 'Top 20 Músicas de um Artista', func: top20SongsByArtist, hasFilter: true },
-};
+};+*/}
 
 const GeneralQuestions = ({ data }) => {
+  const questions = {
+     '1': { label: 'Total de Músicas Tocadas', func: totalSongsPlayed },
+     '2': { label: 'Músicas Diferentes', func: uniqueSongsPlayed },
+     '3': { label: 'Artistas Diferentes', func: uniqueArtistsPlayed },
+     '4': { label: 'Total de Minutos Ouvidos', func: totalMinutesPlayed },
+     '5': { label: 'Música Mais Ouvida', func: mostPlayedSong },
+     '6': { label: 'Média de Tempo Diário', func: dailyAverageTime },
+     '7': { label: 'Horários Mais Ativos', func: mostActiveHours },
+     '8': { label: 'Estação Mais Ativa', func: mostActiveSeason },
+      '9': { label: 'Top 5 Músicas por Estação', func: topSongsBySeason },
+      '10': { label: 'Top 3 Artistas por Estação', func: topArtistsBySeason },
+      '11': { label: 'Top 100 Artistas por Plays', func: top100ArtistsByPlays },
+      '12': { label: 'Top 100 Músicas por Play Time', func: top100SongsByPlayTime },
+   };
   const [selectedQuestion, setSelectedQuestion] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('all-time'); // Filtro de período
   const [artistName, setArtistName] = useState(''); // Nome do artista
@@ -63,6 +72,7 @@ const GeneralQuestions = ({ data }) => {
 
     setResult(resultValue);
   };
+  
 
   return (
     <div className="questions">

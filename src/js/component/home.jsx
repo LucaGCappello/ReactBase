@@ -3,6 +3,7 @@ import GeneralQuestions, { questions } from "./GeneralQuestions";
 import ArtistQuestions from "./ArtistQuestions";
 import spotifyData from "../../data/spotify_data_history.json";
 import Card from "../component/card";
+import CardTops from "../component/cardTops";
 import {
   totalSongsPlayed,
   uniqueSongsPlayed,
@@ -21,6 +22,7 @@ import {
 const Home = () => {
   const [currentPage, setCurrentPage] = useState("general");
   const [data, setData] = useState([]);
+  const [state, setState] = useState(false);
   const questions = [
     { label: "Total de Músicas Tocadas", func: totalSongsPlayed },
     { label: "Músicas Diferentes", func: uniqueSongsPlayed },
@@ -30,10 +32,6 @@ const Home = () => {
     { label: "Média de Tempo Diário", func: dailyAverageTime },
     { label: "Horários Mais Ativos", func: mostActiveHours },
     { label: "Estação Mais Ativa", func: mostActiveSeason },
-    { label: "Top 5 Músicas por Estação", func: topSongsBySeason },
-    { label: "Top 3 Artistas por Estação", func: topArtistsBySeason },
-    { label: "Top 100 Artistas por Plays", func: top100ArtistsByPlays },
-    { label: "Top 100 Músicas por Play Time", func: top100SongsByPlayTime },
   ];
 
   useEffect(() => {
@@ -55,20 +53,29 @@ const Home = () => {
         >
           Artist
         </button>
+        <button
+          className={currentPage === "tops" ? "active" : ""}
+          onClick={() => setCurrentPage("tops")}
+        >
+          Tops
+        </button>
       </div>
       <div className="page-content">
-        {currentPage === "general" && <GeneralQuestions data={data} />}
+        {/* {currentPage === "general" && <GeneralQuestions data={data} />} */}
         {currentPage === "artist" && <ArtistQuestions data={data} />}
       </div>
+      
 
-      <div>
-        {questions.map((q) => (
-          <Card
-            initialText={q.label}
-            overlayText={<div>{JSON.stringify(q.func(data))}</div>}
-          />
-        ))}
-      </div>
+      {setCurrentPage && (
+        <div>
+          {questions.map((q) => (
+            <Card
+              initialText={q.label}
+              overlayText={<div>{JSON.stringify(q.func(data))}</div>}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

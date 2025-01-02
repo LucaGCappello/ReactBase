@@ -4,6 +4,7 @@ import ArtistQuestions from "./ArtistQuestions";
 import spotifyData from "../../data/spotify_data_history.json";
 import Card from "../component/card";
 import CardTops from "../component/cardTops";
+import NavTab from "../component/navtab"
 import {
   totalSongsPlayed,
   uniqueSongsPlayed,
@@ -39,7 +40,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div> 
       <div className="navigation">
         <button
           className={currentPage === "general" ? "active" : ""}
@@ -60,6 +61,7 @@ const Home = () => {
           Tops
         </button>
       </div>
+      <NavTab/>
       <div className="page-content">
         {/* {currentPage === "general" && <GeneralQuestions data={data} />} */}
         {currentPage === "artist" && <ArtistQuestions data={data} />}

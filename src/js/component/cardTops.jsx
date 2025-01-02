@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import {
+  topSongsBySeason,
+  topArtistsBySeason,
+  top100ArtistsByPlays,
+  top100SongsByPlayTime,
+  top20SongsByArtist,
+} from '../functions';
 import "../../styles/cardTops.css";
 
 const CardTops = ({ initialText, overlayText }) => {

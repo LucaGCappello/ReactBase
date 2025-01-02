@@ -8,6 +8,10 @@ import {
   dailyAverageTime,
   mostActiveHours,
   mostActiveSeason,
+  topSongsBySeason,
+  topArtistsBySeason,
+  top100ArtistsByPlays,
+  top100SongsByPlayTime,
 } from '../functions';
 
 {/*const questions = {

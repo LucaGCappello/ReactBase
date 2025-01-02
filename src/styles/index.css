@@ -1,11 +1,14 @@
 body {
   font-family: 'Amaranth', sans-serif;
+  margin: 5px;
+  padding: 5px;
 }
 
 .navigation {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  margin-top: 80px;
 }
 
 button {
@@ -47,6 +50,7 @@ button.active {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 10px;
+  display: flex;
 }
 
 .search-section button {
@@ -56,6 +60,7 @@ button.active {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  display: flex;
 }
 
 .search-section button:hover {
@@ -85,6 +90,7 @@ button.active {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  display: flex;
 }
 
 .artist-questions input {
@@ -93,6 +99,7 @@ button.active {
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  display: flex;
 }
 
 .artist-questions button {
@@ -102,6 +109,7 @@ button.active {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
 }
 
 .artist-questions button:hover {

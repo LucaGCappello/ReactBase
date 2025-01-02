@@ -1,5 +1,5 @@
 import React from 'react';
-import './navtab.css';
+import '../../styles/navtab.css';
 
 const NavTab = () => {
   return (

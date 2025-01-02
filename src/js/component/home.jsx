@@ -18,7 +18,6 @@ import {
   topArtistsBySeason,
   top100ArtistsByPlays,
   top100SongsByPlayTime,
-  top20SongsByArtist,
 } from "../functions";
 
 const Home = () => {

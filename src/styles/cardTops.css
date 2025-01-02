@@ -19,17 +19,32 @@ body {
   
   .initial-button,
   .overlay-button {
-    padding: 18px;
-    font-size: 18px;
+    padding: 14px 20px; /* Adjusted padding for a more balanced look */
+    font-size: 16px; /* Slightly smaller font for better flexibility */
     font-weight: bold;
-    color: #fff;
-    background-color: #3E78B2;
-    border: none;
-    border-radius: 10px;
+    color: #fff; /* White text */
+    background-color: #3E78B2; /* Primary blue background */
+    border: none; /* No border */
+    border-radius: 8px; /* Slightly reduced border radius for a cleaner look */
     cursor: pointer;
-    width: 380px;
-    height: 70px;
-  }
+    width: 100%; /* Make the button responsive */
+    max-width: 380px; /* Ensure it doesn't grow too large */
+    height: auto; /* Allow height to adjust dynamically */
+    text-align: center; /* Center text */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover effect */
+}
+
+.overlay-button:hover {
+    background-color: #2b5a86; /* Darker blue for hover effect */
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.overlay-button:active {
+    transform: translateY(0); /* Reset position on click */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+}
+
   
   .overlay-button {
     background-color: #4A525A;

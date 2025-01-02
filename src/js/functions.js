@@ -140,7 +140,7 @@ export const topArtistsBySeason = (data) => {
 };
 
 // 11) Top 100 artistas ordenados por quantidade de plays
-export const top100ArtistsByPlays = (data, period = 'all-time', currentDate = new Date()) => {
+export const top100ArtistsByPlays = (data, period = 'all-time', currentDate = new Date('2023-12-19')) => {
   const filteredData = filterByTimePeriod(data, period, currentDate);
   const artistCount = {};
 
@@ -158,7 +158,7 @@ export const top100ArtistsByPlays = (data, period = 'all-time', currentDate = ne
 };
 
 // 12) Top 100 músicas ordenadas por milissegundos em plays
-export const top100SongsByPlayTime = (data, period = 'all-time', currentDate = new Date()) => {
+export const top100SongsByPlayTime = (data, period = 'all-time', currentDate = new Date('2023-12-19')) => {
   const filteredData = filterByTimePeriod(data, period, currentDate);
   const songTime = {};
 
@@ -174,6 +174,7 @@ export const top100SongsByPlayTime = (data, period = 'all-time', currentDate = n
     .slice(0, 100)
     .map(([song, time], index) => `TOP ${index + 1} - ${song}, ${(time / 60000).toFixed(2)} minutos`);
 };
+
 // Função para calcular a porcentagem de plays por artista
 export const artistPlayPercentage = (data) => {
   const totalPlays = data.length;
@@ -195,10 +196,11 @@ export const artistPlayPercentage = (data) => {
 };
 
 // Função para listar as top 20 músicas ordenadas por tempo de reprodução
-export const top20SongsByPlayTime = (data) => {
+export const top20SongsByPlayTime = (data, period = 'all-time', currentDate = new Date('2023-12-19')) => {
+  const filteredData = filterByTimePeriod(data, period, currentDate);
   const songDurations = {};
 
-  data.forEach((item) => {
+  filteredData.forEach((item) => {
     const song = item.master_metadata_track_name;
     if (song) {
       songDurations[song] = (songDurations[song] || 0) + item.ms_played;
@@ -213,7 +215,6 @@ export const top20SongsByPlayTime = (data) => {
       duration: (duration / 60000).toFixed(2) + ' minutos',
     }));
 };
-
 // Função para verificar a posição de um artista no ranking
 export const artistRanking = (data, artistName) => {
   const artistCounts = {};

@@ -7,13 +7,24 @@ import {
   top20SongsByArtist,
   artistRanking,
   artistMostActiveSeason,
+  top100ArtistsByPlays,
+  top100SongsByPlayTime,
+  top20SongsByPlayTime,
 } from '../functions';
 
 const ArtistQuestions = ({ data }) => {
   const [selectedQuestion, setSelectedQuestion] = useState('');
   const [artistName, setArtistName] = useState('');
+  const [timePeriod, setTimePeriod] = useState('all-time'); // Novo estado para período
   const [result, setResult] = useState('');
-  const [showChart, setShowChart] = useState(false); // Controla a exibição do gráfico
+  const [showChart, setShowChart] = useState(false);
+
+  const timeOptions = [
+    { value: '4-weeks', label: 'Últimas 4 semanas' },
+    { value: '6-months', label: 'Últimos 6 meses' },
+    { value: '1-year', label: 'Último ano' },
+    { value: 'all-time', label: 'Desde sempre' },
+  ];
 
   const questions = {
     '1': { label: 'Total de Plays por Artista', func: totalPlaysByArtist },
@@ -23,18 +34,24 @@ const ArtistQuestions = ({ data }) => {
     '5': { label: 'Ranking do Artista', func: artistRanking },
     '6': { label: 'Estação Mais Ativa do Artista', func: artistMostActiveSeason },
     '7': { label: 'Porcentagem de Plays por Artista (Gráfico)' },
+    '8': { label: 'Top 100 Artistas por Plays', func: top100ArtistsByPlays },
+    '9': { label: 'Top 100 Músicas por Tempo', func: top100SongsByPlayTime },
+    '10': { label: 'Top 20 Músicas por Tempo', func: top20SongsByPlayTime },
   };
 
   const handleSearch = () => {
-    if (!artistName.trim() && selectedQuestion !== '7') {
+    if (!artistName.trim() && selectedQuestion !== '7' && !['8', '9', '10'].includes(selectedQuestion)) {
       alert('Por favor, insira o nome de um artista.');
       return;
     }
 
     if (selectedQuestion === '7') {
-      setShowChart(true); // Exibe o gráfico
+      setShowChart(true);
     } else if (questions[selectedQuestion].func) {
-      const resultValue = questions[selectedQuestion].func(data, artistName);
+      const func = questions[selectedQuestion].func;
+      const resultValue = ['8', '9', '10'].includes(selectedQuestion)
+        ? func(data, timePeriod)
+        : func(data, artistName);
       setResult(resultValue);
     }
   };
@@ -42,6 +59,7 @@ const ArtistQuestions = ({ data }) => {
   const handleNewSearch = () => {
     setSelectedQuestion('');
     setArtistName('');
+    setTimePeriod('all-time');
     setResult('');
   };
 
@@ -49,7 +67,7 @@ const ArtistQuestions = ({ data }) => {
     return (
       <ArtistPlayPercentage
         data={data}
-        goBack={() => setShowChart(false)} // Função para voltar
+        goBack={() => setShowChart(false)}
       />
     );
   }
@@ -70,20 +88,27 @@ const ArtistQuestions = ({ data }) => {
               </option>
             ))}
           </select>
-          {selectedQuestion !== '7' && (
-            <>
-              <input
-                type="text"
-                value={artistName}
-                onChange={(e) => setArtistName(e.target.value)}
-                placeholder="Digite o nome do artista"
-              />
-              <button onClick={handleSearch}>Pesquisar</button>
-            </>
+          {['8', '9', '10'].includes(selectedQuestion) && (
+            <select
+              onChange={(e) => setTimePeriod(e.target.value)}
+              value={timePeriod}
+            >
+              {timeOptions.map(({ value, label }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
           )}
-          {selectedQuestion === '7' && (
-            <button onClick={handleSearch}>Exibir Gráfico</button>
+          {selectedQuestion !== '7' && !['8', '9', '10'].includes(selectedQuestion) && (
+            <input
+              type="text"
+              value={artistName}
+              onChange={(e) => setArtistName(e.target.value)}
+              placeholder="Digite o nome do artista"
+            />
           )}
+          <button onClick={handleSearch}>Pesquisar</button>
         </div>
       ) : (
         <div className="result-section">

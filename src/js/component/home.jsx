@@ -33,6 +33,10 @@ const Home = () => {
     { label: "Média de Tempo Diário", func: dailyAverageTime },
     { label: "Horários Mais Ativos", func: mostActiveHours },
     { label: "Estação Mais Ativa", func: mostActiveSeason },
+    { label: 'Top 5 Músicas por Estação', func: topSongsBySeason },
+    { label: 'Top 3 Artistas por Estação', func: topArtistsBySeason },
+    { label: 'Top 100 Artistas por Plays', func: top100ArtistsByPlays },
+    { label: 'Top 100 Músicas por Play Time', func: top100SongsByPlayTime },
   ];
 
   useEffect(() => {

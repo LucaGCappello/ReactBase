@@ -13,7 +13,7 @@ import { artistPlayPercentage } from '../functions';
 // Register the necessary Chart.js components
 ChartJS.register(CategoryScale, LinearScale, ArcElement, Tooltip, Legend);
 
-const ArtistPlayPercentage = ({ data }) => {
+const ArtistPlayPercentage = ({ data, goBack }) => {
   const artistData = artistPlayPercentage(data);
 
   const chartData = {
@@ -71,6 +71,9 @@ const ArtistPlayPercentage = ({ data }) => {
       <h2>Top 10 Artistas por Porcentagem de Plays</h2>
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
         <Pie data={chartData} options={chartOptions} />
+      </div>
+      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+        <button onClick={goBack}>Nova Pesquisa</button>
       </div>
     </div>
   );

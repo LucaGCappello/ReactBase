@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ArtistPlayPercentage from './ArtistPlayPercentage';
 import {
   totalPlaysByArtist,
   uniqueSongsByArtist,
@@ -7,30 +8,32 @@ import {
   artistRanking,
   artistMostActiveSeason,
 } from '../functions';
-import ArtistPlayPercentage from './ArtistPlayPercentage';
 
 const ArtistQuestions = ({ data }) => {
   const [selectedQuestion, setSelectedQuestion] = useState('');
   const [artistName, setArtistName] = useState('');
   const [result, setResult] = useState('');
+  const [showChart, setShowChart] = useState(false); // Controla a exibição do gráfico
 
   const questions = {
     '1': { label: 'Total de Plays por Artista', func: totalPlaysByArtist },
     '2': { label: 'Músicas Diferentes por Artista', func: uniqueSongsByArtist },
     '3': { label: 'Minutos Ouvidos por Artista', func: totalMinutesByArtist },
     '4': { label: 'Top 20 Músicas por Tempo (Artista)', func: top20SongsByArtist },
-   '5': { label: 'Ranking do Artista', func: artistRanking },
+    '5': { label: 'Ranking do Artista', func: artistRanking },
     '6': { label: 'Estação Mais Ativa do Artista', func: artistMostActiveSeason },
-    '7': { label: 'Porcentagem de Plays por Artista (Gráfico)', func: ArtistPlayPercentage }, 
+    '7': { label: 'Porcentagem de Plays por Artista (Gráfico)' },
   };
 
   const handleSearch = () => {
-    if (!artistName.trim()) {
+    if (!artistName.trim() && selectedQuestion !== '7') {
       alert('Por favor, insira o nome de um artista.');
       return;
     }
 
-    if (selectedQuestion && questions[selectedQuestion].func) {
+    if (selectedQuestion === '7') {
+      setShowChart(true); // Exibe o gráfico
+    } else if (questions[selectedQuestion].func) {
       const resultValue = questions[selectedQuestion].func(data, artistName);
       setResult(resultValue);
     }
@@ -42,14 +45,24 @@ const ArtistQuestions = ({ data }) => {
     setResult('');
   };
 
+  if (showChart) {
+    return (
+      <ArtistPlayPercentage
+        data={data}
+        goBack={() => setShowChart(false)} // Função para voltar
+      />
+    );
+  }
+
   return (
     <div className="artist-questions">
       <h2>Perguntas sobre Artistas</h2>
-      {selectedQuestion === '7' ? (
-        <ArtistPlayPercentage data={data} />
-      ) : !result ? (
+      {!result ? (
         <div className="search-section">
-          <select onChange={(e) => setSelectedQuestion(e.target.value)} value={selectedQuestion}>
+          <select
+            onChange={(e) => setSelectedQuestion(e.target.value)}
+            value={selectedQuestion}
+          >
             <option value="">Selecione uma pergunta</option>
             {Object.entries(questions).map(([key, { label }]) => (
               <option key={key} value={key}>
@@ -67,6 +80,9 @@ const ArtistQuestions = ({ data }) => {
               />
               <button onClick={handleSearch}>Pesquisar</button>
             </>
+          )}
+          {selectedQuestion === '7' && (
+            <button onClick={handleSearch}>Exibir Gráfico</button>
           )}
         </div>
       ) : (

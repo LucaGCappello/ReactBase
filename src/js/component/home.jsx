@@ -17,6 +17,7 @@ import {
   topArtistsBySeason,
   top100ArtistsByPlays,
   top100SongsByPlayTime,
+  top20SongsByArtist,
 } from "../functions";
 
 const Home = () => {
@@ -32,10 +33,6 @@ const Home = () => {
     { label: "Média de Tempo Diário", func: dailyAverageTime },
     { label: "Horários Mais Ativos", func: mostActiveHours },
     { label: "Estação Mais Ativa", func: mostActiveSeason },
-    { label: 'Top 5 Músicas por Estação', func: topSongsBySeason },
-    { label: 'Top 3 Artistas por Estação', func: topArtistsBySeason },
-    { label: 'Top 100 Artistas por Plays', func: top100ArtistsByPlays },
-    { label: 'Top 100 Músicas por Play Time', func: top100SongsByPlayTime },
   ];
 
   useEffect(() => {
@@ -68,9 +65,8 @@ const Home = () => {
         {/* {currentPage === "general" && <GeneralQuestions data={data} />} */}
         {currentPage === "artist" && <ArtistQuestions data={data} />}
       </div>
-      
 
-      {setCurrentPage && (
+      {currentPage === "general" ? (
         <div>
           {questions.map((q) => (
             <Card
@@ -79,6 +75,27 @@ const Home = () => {
             />
           ))}
         </div>
+      ) : currentPage === "tops" ? (
+        <div>
+          <CardTops
+            initialText="Top 5 Músicas por Estação"
+            overlayText={<div>{JSON.stringify(topSongsBySeason(data))}</div>}
+          />
+          <CardTops
+            initialText="Top 3 Artistas por Estação"
+            overlayText={<div>{JSON.stringify(topArtistsBySeason(data))}</div>}
+          />
+          <CardTops
+            initialText="Top 100 Artistas por Plays"
+            overlayText={<div>{JSON.stringify(top100ArtistsByPlays(data))}</div>}
+          />
+          <CardTops
+            initialText="Top 100 Músicas por Play Time"
+            overlayText={<div>{JSON.stringify(top100SongsByPlayTime(data))}</div>}
+          />
+        </div>
+      ) : (
+        <div></div>
       )}
     </div>
   );

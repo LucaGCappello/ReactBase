@@ -7,8 +7,7 @@ import {
   artistRanking,
   artistMostActiveSeason,
 } from '../functions';
-import '../../styles/ArtistQuestions.css'
-
+import ArtistPlayPercentage from './ArtistPlayPercentage';
 
 const ArtistQuestions = ({ data }) => {
   const [selectedQuestion, setSelectedQuestion] = useState('');

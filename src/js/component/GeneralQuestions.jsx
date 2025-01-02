@@ -10,7 +10,7 @@ import {
   mostActiveSeason,
 } from '../functions';
 
-const questions = {
+{/*const questions = {
   '1': { label: 'Total de Músicas Tocadas', func: totalSongsPlayed },
   '2': { label: 'Músicas Diferentes', func: uniqueSongsPlayed },
   '3': { label: 'Artistas Diferentes', func: uniqueArtistsPlayed },
@@ -24,7 +24,7 @@ const questions = {
   '11': { label: 'Top 100 Artistas por Plays', func: top100ArtistsByPlays, hasFilter: true },
   '12': { label: 'Top 100 Músicas por Play Time', func: top100SongsByPlayTime, hasFilter: true },
   '13': { label: 'Top 20 Músicas de um Artista', func: top20SongsByArtist, hasFilter: true },
-};
+};+*/}
 
 const GeneralQuestions = ({ data }) => {
   const questions = {

@@ -4,7 +4,7 @@ import ArtistQuestions from "./ArtistQuestions";
 import spotifyData from "../../data/spotify_data_history.json";
 import Card from "../component/card";
 import CardTops from "../component/cardTops";
-import NavTab from "../component/navtab"
+import NavTab from "../component/navtab";
 import {
   totalSongsPlayed,
   uniqueSongsPlayed,
@@ -24,7 +24,6 @@ import {
 const Home = () => {
   const [currentPage, setCurrentPage] = useState("general");
   const [data, setData] = useState([]);
-  const [state, setState] = useState(false);
   const questions = [
     { label: "Total de Músicas Tocadas", func: totalSongsPlayed },
     { label: "Músicas Diferentes", func: uniqueSongsPlayed },
@@ -41,7 +40,8 @@ const Home = () => {
   }, []);
 
   return (
-    <div> 
+    <div>
+      <NavTab />
       <div className="navigation">
         <button
           className={currentPage === "general" ? "active" : ""}
@@ -62,7 +62,6 @@ const Home = () => {
           Tops
         </button>
       </div>
-      <NavTab/>
       <div className="page-content">
         {/* {currentPage === "general" && <GeneralQuestions data={data} />} */}
         {currentPage === "artist" && <ArtistQuestions data={data} />}
@@ -78,7 +77,7 @@ const Home = () => {
           ))}
         </div>
       ) : currentPage === "tops" ? (
-        <div>
+        <div style={{ marginTop: "20px" }}>
           <CardTops
             initialText="Top 5 Músicas por Estação"
             overlayText={<div>{JSON.stringify(topSongsBySeason(data))}</div>}
@@ -89,11 +88,15 @@ const Home = () => {
           />
           <CardTops
             initialText="Top 100 Artistas por Plays"
-            overlayText={<div>{JSON.stringify(top100ArtistsByPlays(data))}</div>}
+            overlayText={
+              <div>{JSON.stringify(top100ArtistsByPlays(data))}</div>
+            }
           />
           <CardTops
             initialText="Top 100 Músicas por Play Time"
-            overlayText={<div>{JSON.stringify(top100SongsByPlayTime(data))}</div>}
+            overlayText={
+              <div>{JSON.stringify(top100SongsByPlayTime(data))}</div>
+            }
           />
         </div>
       ) : (

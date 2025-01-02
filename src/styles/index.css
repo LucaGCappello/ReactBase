@@ -1,5 +1,5 @@
 body {
-  font-family: 'Amaranth', sans-serif;
+  font-family: "Amaranth", sans-serif;
   margin: 5px;
   padding: 5px;
 }
@@ -8,7 +8,6 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 80px;
 }
 
 button {
@@ -21,7 +20,7 @@ button {
 }
 
 button.active {
-  background-color: #004BA8;
+  background-color: #004ba8;
   color: white;
 }
 
@@ -55,7 +54,7 @@ button.active {
 
 .search-section button {
   padding: 10px 20px;
-  background-color: #004BA8;
+  background-color: #004ba8;
   color: white;
   border: none;
   border-radius: 10px;
@@ -73,7 +72,7 @@ button.active {
 
 .result-section button {
   padding: 10px 20px;
-  background-color: #004BA8;
+  background-color: #004ba8;
   color: white;
   border: none;
   border-radius: 10px;
